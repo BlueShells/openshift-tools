@@ -81,6 +81,16 @@ class AWSUtil(object):
             print "Buckets found: " + str(bucket_list)
 
         return bucket_list
+    def get_rds_info(self,verbose=False, RdsRegion=''):
+        ''' Get the event of all rds event'''
+        rds_cmd = "aws rds describe-events --duration 1440"
+        if not RdsRegion == '':
+            rds_cmd = rds_cmd + " --region " + RdsRegion
+
+        rdsinfo = self._run_cmd(rds_cmd)
+        json_list = json.loads(rdsinfo)
+
+        return json_list
 
     def get_bucket_info(self, s3_bucket, verbose=False, BucketRegion=''):
         ''' Get size (in GB) and object count for S3 bucket '''

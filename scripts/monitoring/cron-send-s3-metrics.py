@@ -107,6 +107,9 @@ def main():
 
     bucket_list = awsutil.get_bucket_list(verbose=args.debug, BucketRegion=bucket_region)
 
+    rds_info = awsutil.get_rds_info(RdsRegion=bucket_region)
+    print 'rdsinfo :',rds_info
+
     bucket_stats = {}
 
     for bucket in bucket_list:
